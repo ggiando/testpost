@@ -1,0 +1,18 @@
+
+
+- php://
+
+
+è un protocoloo pèer accedere ai vari I/O streams.
+PHP fornisce una serie di flussi i/O che consentono l'accesso ad input e output di PHP, file temporanei in memoria o su disco.
+
+php://stdin, php://stdout e php://stderr consentono l'accesso diretto al flusso di input o output corrispondente.
+Lo stream fa riferimento ad un duplicato del descrittore del file, si compierano operazioni solo sulla copia.
+
+php://stdin è di sola lettura, mentre php://stdout e php://stderr sono di sola scrittura.
+
+
+- php://input
+
+è uno stream di sola lettura che consente di leggere i dati grezzi del body della richiesta. Non può essere utilizzato con l'enctype="multipart/form-data".
+Questo è il formato del contenuto utilizzato per inviare per fare l'upload di file.

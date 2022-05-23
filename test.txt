@@ -1,0 +1,32 @@
+You can read raw POST data using PHP://input. $HTTP_RAW_POST_DATA is a memory intensive alternative to $HTTP_RAW_POST_DATA, 
+but it does not require any special PHP. directives are ini. The following are read-only versions of PHP: PHP://stdin, PHP://stderr, 
+and PHP://output.
+
+
+- file_get_contents('php://input')
+
+
+Con la funzione file_get_contents() è possibile leggere qualsiasi file e trasformarlo in una stringa.
+
+
+
+Indicando come file di origine php://input, andiamo ad indicare tutti i dati grezzi presenti nel body della richiesta. 
+Vengono restituiti tutti i dati grezzi dopo l'header http della richiesta a prescindere dal tipo del contenuto
+
+
+Tutti i dati in POST possono essere riccevuti in uno scrcipt PHP usando la variabile globale $_POST. Ma questo non va a buon fine 
+nel caso vogliamo ricevere una string JSON come dato della richiesta POST. Per ricevere una stringa JSON possiamo usare "php://input"
+insieme alla funzione file_get_contents() che ci aiuta a ricevere dati JSON come file e leggerlo come una stringa. In seguito possiamo usare la funzione json_decode()
+per decodificare la stringa JSON.
+
+$HTTP_RAW_POST_DATA è un'alternativa che influisce sulla memoria rispetto 
+
+
+Example:
+<?php
+// Prendiamo i dati grezzi dal php://input
+$json = file_get_contents('php://input');
+
+// Coinvertiamo la stringa in un JSON
+$data = json_decode($json);
+?>

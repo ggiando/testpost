@@ -11,7 +11,6 @@ $query = "SELECT id, nome FROM sale";
 try {
     $statement = $conn->query($query);
     $sale = $statement->fetchAll(\PDO::FETCH_ASSOC);
-    // var_dump($sale);
 } catch (\PDOException $e) {
     exit($e->getMessage());
 }
@@ -26,11 +25,21 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid;
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 
 <body>
     <!--<form action="php/index.php" method="post">-->
-    <form id="formsubmit">
+    <form id="formsubmit" style="margin-top: 20px; margin-bottom:40px;">
         <div>
             <label for="sala">Sala</label>
             <select name="sala" id="sala">
@@ -52,21 +61,46 @@ try {
     </form>
 
 
+    <div id="risultati">
+        <table id="tablerisultati" style="display:none;">
+            <tr>
+                <th>id vasca</th>
+                <th>nome vasca</th>
+                <th>id sensore</th>
+                <th>tipo sensore</th>
+                <th>misura</th>
+            </tr>
+            <tr w3-repeat="valori">
+                <td>{{idvasca}}</td>
+                <td>{{nomevasca}}</td>
+                <td>{{idsensore}}</td>
+                <td>{{tiposensore}}</td>
+                <td>{{valoremisura}}</td>
+            </tr>
+        </table>
+    </div>
+
+
     <script>
         $("#formsubmit").submit(function(e) {
             e.preventDefault();
             $.ajax({
                 type: "POST",
                 url: "php/index.php/range",
-                dataType: "text",
-                contentType: "application/json",
+                dataType: "application/json",
+                contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                // contentType: "application/json",
                 data: {
                     "sala": $("#sala").val(),
                     "inizio": $("#dataini").val(),
                     "fine": $("#datafin").val()
                 },
                 success: function(obj, textstatus) {
-                    echo;
+                    // console.log(obj);
+                    if (obj) {
+                        $("#tablerisultati").show();
+                        w3.displayObject("tablerisultati", JSON.parse(obj));
+                    }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     console.log(xhr);

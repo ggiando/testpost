@@ -1,0 +1,6 @@
+[book]
+authors = ["giando"]
+language = "it"
+multilingual = false
+src = "src"
+title = "Sending POST with AJAX"
